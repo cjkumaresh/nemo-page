@@ -12,13 +12,13 @@ var _ = require('lodash'),
 
 module.exports.typeMappings = typeMappings;
 
-module.exports.setup = function (locatorDirectory, modelDirectory, nemo, _callback) {
+module.exports.setup = function (locatorDirectory, modelDirectory, waitTimeout, numRetries, nemo, _callback) {
     log('Initializing nemo-page');
     var callback = _.once(_callback),
         drivex = Drivex(nemo.driver, nemo.wd);
 
     // Add page namespace to nemo
-    nemo.page = pageCommon(nemo, drivex);
+    nemo.page = pageCommon(nemo, drivex, waitTimeout, numRetries);
 
     if (modelDirectory !== null) {
         typeMappings.resetMappings();
