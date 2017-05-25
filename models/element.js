@@ -178,13 +178,12 @@ var ElementModel = function (config, parent, nemo, drivex) {
         },
 
         waitForDisplayed: function (baseElement) {
-            return base.waitForPresent(baseElement).then(function () {
-                return nemo.driver.wait(function () {
-                    return base.get(baseElement).isDisplayed().thenCatch(function (err) {
-                        return false;
-                    });
-                }, nemo.page.WAIT_TIMEOUT);
-            });
+            base.waitForPresent(baseElement);
+            return nemo.driver.wait(function () {
+                return base.get(baseElement).isDisplayed().thenCatch(function (err) {
+                    return false;
+                });
+            }, nemo.page.WAIT_TIMEOUT);
         },
 
         waitForNotDisplayed: function (baseElement) {
